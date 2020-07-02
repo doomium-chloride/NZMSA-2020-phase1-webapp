@@ -1,4 +1,5 @@
 import React from 'react';
+import './CardImage.css';
 
 const baseURL = "https://art.hearthstonejson.com/v1/512x/";
 const imgFormat = ".jpg";

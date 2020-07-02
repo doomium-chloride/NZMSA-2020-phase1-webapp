@@ -26,6 +26,8 @@ export function search(database: Array<any>, query: string) {
 }
 
 function contains(string1: string, string2: string){
+    string1 = string1 + "";
+    string2 = string2 + "";
     let arr1 = string1.split(" ");
     arr1 = arr1.filter(removeEmptyString);
     let arr2 = string2.split(" ");
@@ -36,7 +38,7 @@ function contains(string1: string, string2: string){
 
     for(let i = 0; i < len1; i++){
         for(let j = 0; j < len2; j++){
-            if(arr1[i] == arr2[j]){
+            if(arr1[i].toLowerCase() == arr2[j].toLowerCase()){
                 return true;// one match found
             }
         }
