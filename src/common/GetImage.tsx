@@ -16,11 +16,7 @@ export function getImageFromID(id: string){
     return <img className="card-pic" src={url}/>
 }
 
-export function getCard(id: string){
+export default function Card({id, onClick} : {id: string, onClick: Function}){
     const url = baseCardURL + id + cardFormat;
-    return <img className="card-pic" src={url}/>
-}
-
-export default function Card({id} : {id: string}){
-    return getCard(id);
+    return <img className="card-pic" src={url} onClick={() => onClick()}/>
 }

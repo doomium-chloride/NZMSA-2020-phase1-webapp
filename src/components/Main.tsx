@@ -3,6 +3,7 @@ import {TextField, Button, Select, Checkbox, FormGroup, FormControlLabel} from '
 import {search} from '../common/Search';
 import CardGrid from './CardGrid';
 import sort from '../common/Sort';
+import PopupInfo from './CardInfoPopup';
 import './Main.css';
 
 const allCards = "https://api.hearthstonejson.com/v1/latest/enUS/cards.collectible.json";
@@ -16,7 +17,8 @@ type stateTypes = {
     sort: string,
     ascending: boolean,
     index: number,
-    length: number
+    length: number,
+    showCard: any
 }
 
 class Main extends Component<{}, stateTypes>{
@@ -29,7 +31,8 @@ class Main extends Component<{}, stateTypes>{
             sort: "none",
             ascending: false,
             index: 0,
-            length: 0
+            length: 0,
+            showCard: null
         };
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
@@ -38,6 +41,9 @@ class Main extends Component<{}, stateTypes>{
 
         this.nextPage = this.nextPage.bind(this);
         this.prevPage = this.prevPage.bind(this);
+
+        this.showDetails = this.showDetails.bind(this);
+        this.closeInfoPopup = this.closeInfoPopup.bind(this);
     }
 
     componentDidMount(){
@@ -86,6 +92,14 @@ class Main extends Component<{}, stateTypes>{
         this.setState({index: Math.max(this.state.index - maxView, 0)});
     }
 
+    showDetails(card: any){
+        this.setState({showCard: card});
+    }
+
+    closeInfoPopup(){
+        this.showDetails(null);
+    }
+
     render(){
         const type = sortType(this.state.sort);
         const sortedCards = sort(this.state.searchedCards, this.state.sort, type, this.state.ascending);
@@ -117,12 +131,13 @@ class Main extends Component<{}, stateTypes>{
                 </FormGroup>
                 </div>
                 <div className="Grid">
-                    <CardGrid cards={sliced} />
+                    <CardGrid cards={sliced} onClick={this.showDetails} />
                 </div>
                 <div className="sliced-navigation">
                     <Button variant="contained" onClick={this.prevPage} >Prev</Button>
                     <Button variant="contained" onClick={this.nextPage} >Next</Button>
                 </div>
+                {sliced.map(x => <PopupInfo card={x} visible={this.state.showCard == x} onClose={this.closeInfoPopup} />)}
             </div>
         )
     }
@@ -144,8 +159,8 @@ function sortType(prop: string){
 function first(sauce: any[], index: number){
     index = Math.max(0, index);
     const len = sauce.length;
-    const newIndex = Math.min(index, len - maxView -1)
-    const max = Math.min(newIndex + maxView, len - 1);
+    const newIndex = Math.min(index, len - maxView + 1)
+    const max = Math.min(newIndex + maxView, len);
     return sauce.slice(newIndex, max);
 }
 
