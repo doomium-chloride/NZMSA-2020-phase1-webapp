@@ -6,3 +6,9 @@
     width: 100%;
     margin: auto;
 }
+.sliced-navigation{
+    margin: 1%;
+}
+.sliced-navigation > Button{
+    margin: 1%;
+}

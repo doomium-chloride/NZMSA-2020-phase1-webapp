@@ -8,7 +8,7 @@ function GridCard({card}: {card: any}){
     // I'm just too lazy to define the card object so I use any
     // Also different cards have different attributes
     return(
-        <Grid key={"card_"+card.id} xs={4} item className="MediaGridCard">
+        <Grid key={"card_"+card.id} xs={3} item className="MediaGridCard">
             <Card id={card.id} />
         </Grid>
     );

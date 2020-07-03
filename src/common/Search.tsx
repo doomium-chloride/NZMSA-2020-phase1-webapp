@@ -1,5 +1,9 @@
 export function search(database: Array<any>, query: string) {
 
+    if(query.length <= 0){
+        return database;
+    }
+
     let output: Array<any> = [];
 
     database.forEach( entry => {
