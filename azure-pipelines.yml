@@ -7,7 +7,7 @@ trigger:
 - master
 
 variables:
-  rootDir: 'hearthstone-viewer'
+  rootDir: './hearthstone-viewer'
   buildDir: '$(buildDir)/build'
 
 pool:
