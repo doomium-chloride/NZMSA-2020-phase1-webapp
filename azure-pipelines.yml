@@ -22,6 +22,7 @@ steps:
 - script: |
     mkdir -p -- $(rootDir)
     mkdir -p -- $(buildDir)
+    mkdir -p -- $(Build.ArtifactStagingDirectory)
   displayName: 'Makes sure directories exist'
 
 - script: |
@@ -36,7 +37,7 @@ steps:
     rootFolderOrFile: '$(buildDir)'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).zip'
     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
