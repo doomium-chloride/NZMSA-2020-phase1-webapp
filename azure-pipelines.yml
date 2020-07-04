@@ -20,6 +20,11 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    mkdir -p -- $(rootDir)
+    mkdir -p -- $(buildDir)
+  displayName: 'Makes sure directories exist'
+
+- script: |
     cd $(rootDir)
     npm install
     npm run build
