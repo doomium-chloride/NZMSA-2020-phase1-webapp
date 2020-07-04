@@ -28,13 +28,14 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    mkdir -p -- $(rootDir)
     cd $(rootDir)
     npm install
     npm run build
     cd ..
   displayName: 'npm install and build'
 - script: |
-    mkdir /home/vsts/work/1/s/my-app/build
+    mkdir -p -- $(Build.ArtifactStagingDirectory)
   displayName: Make archive directory
 - task: ArchiveFiles@2
   inputs:
