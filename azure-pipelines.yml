@@ -5,6 +5,11 @@
 
 trigger:
 - master
+- develop
+
+variables:
+  rootDir: 'hearthstone-viewer'
+  buildDir: '$(rootDir)/build'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -17,3 +22,27 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    cd $(rootDir)
+    npm install
+    npm run build
+    cd ..
+  displayName: 'npm install and build'
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(buildDir)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
