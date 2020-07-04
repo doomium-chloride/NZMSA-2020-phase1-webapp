@@ -7,8 +7,8 @@ trigger:
 - master
 
 variables:
-  rootDir: '/'
-  buildDir: '/build'
+  rootDir: 'hearthstone-viewer'
+  buildDir: '$(buildDir)/build'
 
 pool:
   vmImage: 'ubuntu-latest'
