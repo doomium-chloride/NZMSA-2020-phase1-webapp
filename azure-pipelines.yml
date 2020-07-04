@@ -33,6 +33,9 @@ steps:
     npm run build
     cd ..
   displayName: 'npm install and build'
+- script: |
+    mkdir /home/vsts/work/1/s/my-app/build
+  displayName: Make archive directory
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(buildDir)'
