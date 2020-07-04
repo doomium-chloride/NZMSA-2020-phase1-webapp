@@ -36,6 +36,7 @@ steps:
   displayName: 'npm install and build'
 - script: |
     mkdir -p -- $(Build.ArtifactStagingDirectory)
+    mkdir -p -- $(rootDir)/build
   displayName: Make archive directory
 - task: ArchiveFiles@2
   inputs:
