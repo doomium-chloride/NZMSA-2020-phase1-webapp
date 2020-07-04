@@ -36,7 +36,7 @@ steps:
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(buildDir)'
-    includeRootFolder: false
+    includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(archiveDir)/build_$(Build.BuildId).zip'
     replaceExistingArchive: true
