@@ -9,6 +9,7 @@ trigger:
 variables:
   rootDir: 'hearthstone-viewer'
   buildDir: '$(rootDir)/build'
+  archiveDir: '$(buildDir)/archive'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -22,7 +23,7 @@ steps:
 - script: |
     mkdir -p -- $(rootDir)
     mkdir -p -- $(buildDir)
-    mkdir -p -- $(Build.ArtifactStagingDirectory)
+    mkdir -p -- $(archiveDir)
   displayName: 'Makes sure directories exist'
 
 - script: |
@@ -37,11 +38,11 @@ steps:
     rootFolderOrFile: '$(buildDir)'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).zip'
+    archiveFile: '$(archiveDir)/build_$(Build.BuildId).zip'
     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(archiveDir)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
