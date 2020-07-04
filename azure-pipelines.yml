@@ -33,9 +33,6 @@ steps:
     npm run build
     cd ..
   displayName: 'npm install and build'
-- script: |
-    mkdir build
-  displayName: 'make build archive directory'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(buildDir)'
