@@ -38,10 +38,10 @@ steps:
     rootFolderOrFile: '$(buildDir)'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(buildDir)/$(Build.BuildId).zip'
     replaceExistingArchive: true
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(buildDir)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
