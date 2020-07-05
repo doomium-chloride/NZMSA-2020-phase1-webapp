@@ -26,6 +26,7 @@ steps:
     mkdir -p -- $(buildDir)
     mkdir -p -- $(copyDir)
     mkdir -p -- $(Build.ArtifactStagingDirectory)
+    mkdir -p -- $(Build.ArtifactStagingDirectory)/build
   displayName: 'Makes sure directories exist'
 
 - script: |
@@ -37,12 +38,12 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: $(Build.SourcesDirectory)
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    sourceFolder: $(Build.SourcesDirectory)/build
+    targetFolder: $(Build.ArtifactStagingDirectory)/build
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/build'
     includeRootFolder: false
     archiveType: 'tar'
     tarCompression: 'gz'
