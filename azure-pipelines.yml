@@ -53,7 +53,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).tar.gz'
+    PathtoPublish: '$(Build.SourcesDirectory)/build'
     ArtifactName: 'drop'
     publishLocation: 'Container'
 # (Build.ArtifactStagingDirectory)
