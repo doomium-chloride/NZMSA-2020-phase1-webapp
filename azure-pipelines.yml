@@ -37,13 +37,15 @@ steps:
   inputs:
     rootFolderOrFile: '$(buildDir)'
     includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(archiveDir)/build_$(Build.BuildId).zip'
+    archiveType: 'tar'
+    tarCompression: 'gz'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).tar.gz'
     replaceExistingArchive: true
+    verbose: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(archiveDir)/build_$(Build.BuildId).zip'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
 # (Build.ArtifactStagingDirectory)
