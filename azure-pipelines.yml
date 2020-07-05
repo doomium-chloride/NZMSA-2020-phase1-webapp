@@ -43,7 +43,7 @@ steps:
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'tar'
     tarCompression: 'gz'
     archiveFile: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).tar.gz'
