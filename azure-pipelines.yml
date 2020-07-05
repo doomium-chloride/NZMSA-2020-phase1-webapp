@@ -9,6 +9,7 @@ trigger:
 variables:
   rootDir: 'hearthstone-viewer'
   buildDir: '$(rootDir)/build'
+  copyDir: '$(rootDir)/copy'
   archiveDir: '$(buildDir)/archive'
 
 pool:
@@ -23,6 +24,7 @@ steps:
 - script: |
     mkdir -p -- $(rootDir)
     mkdir -p -- $(buildDir)
+    mkdir -p -- $(copyDir)
     mkdir -p -- $(Build.ArtifactStagingDirectory)
   displayName: 'Makes sure directories exist'
 
@@ -33,9 +35,16 @@ steps:
     cd ..
   displayName: 'npm install and build'
 
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: '$(buildDir)' 
+    contents: '**/*' 
+    targetFolder: '$(copyDir)'
+    cleanTargetFolder: true
+
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(buildDir)'
+    rootFolderOrFile: '$(copyDir)'
     includeRootFolder: false
     archiveType: 'tar'
     tarCompression: 'gz'
@@ -45,7 +54,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).tar.gz'
     ArtifactName: 'drop'
     publishLocation: 'Container'
 # (Build.ArtifactStagingDirectory)
