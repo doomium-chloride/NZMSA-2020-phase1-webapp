@@ -35,9 +35,14 @@ steps:
     cd ..
   displayName: 'npm install and build'
 
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: $(Build.SourcesDirectory)
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(buildDir)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
     includeRootFolder: true
     archiveType: 'tar'
     tarCompression: 'gz'
@@ -47,7 +52,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(buildDir)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).tar.gz'
     ArtifactName: 'drop'
     publishLocation: 'Container'
 # (Build.ArtifactStagingDirectory)
