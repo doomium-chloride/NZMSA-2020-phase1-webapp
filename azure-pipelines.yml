@@ -33,7 +33,7 @@ steps:
     cd $(rootDir)
     npm cache clean --force
     mkdir -p node_modules
-    rmdir -r node_modules
+    rm -rf node_modules
     npm install
     npm run build
     cd ..
