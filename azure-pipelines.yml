@@ -38,7 +38,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: $(Build.SourcesDirectory)/build
+    sourceFolder: $(Build.SourcesDirectory)
     targetFolder: $(Build.ArtifactStagingDirectory)/build
 
 - task: ArchiveFiles@2
