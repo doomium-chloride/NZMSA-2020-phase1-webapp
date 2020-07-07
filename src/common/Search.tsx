@@ -12,18 +12,9 @@ export function search(database: Array<any>, query: string) {
             if (Object.prototype.hasOwnProperty.call(entry, prop)) {
                 if(Array.isArray(entry[prop])){
                     let array = entry[prop];
-                    let len = array.length;
                     allStrings.push(array.join(' '));
-                    // for(let i = 0; i < len; i++){
-                    //     // if(contains(array[i], query)){
-                    //     //     output.push(entry);
-                    //     //     return null;//go to next entry
-                    //     // }
-                    // }
                 } else {
                     allStrings.push(entry[prop] + "")
-                    // output.push(entry);
-                    // return null;//go to next entry
                 }
             }
         }
@@ -50,13 +41,6 @@ export function contains(string1: string, string2: string){
     const len1 = arr1.length;
     const len2 = arr2.length;
 
-    // for(let i = 0; i < len1; i++){
-    //     for(let j = 0; j < len2; j++){
-    //         if(arr1[i].toLowerCase() == arr2[j].toLowerCase()){
-    //             return true;// one match found
-    //         }
-    //     }
-    // }
     for(let i = 0; i < len1; i++){
         arr1[i] = arr1[i].toLowerCase();
     }
