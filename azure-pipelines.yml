@@ -7,7 +7,6 @@ trigger:
 - master
 
 variables:
-  rootDir: 'my-app'
   buildDir: 'build'
 
 pool:
@@ -37,59 +36,3 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-
-# trigger:
-# - master
-
-# variables:
-#   rootDir: 'hearthstone-viewer'
-#   buildDir: 'build'
-#   copyDir: 'copy'
-#   archiveDir: '$(buildDir)/archive'
-
-# pool:
-#   vmImage: 'ubuntu-latest'
-
-# steps:
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: '12.x' 
-#   displayName: 'Install Node.js'
-
-# - script: |
-#     mkdir -p -- $(rootDir)
-#     mkdir -p -- $(buildDir)
-#     mkdir -p -- $(copyDir)
-#     mkdir -p -- $(Build.ArtifactStagingDirectory)
-#     mkdir -p -- $(Build.ArtifactStagingDirectory)/build
-#   displayName: 'Makes sure directories exist'
-
-# - script: |
-#     npm cache clean --force
-#     mkdir -p node_modules
-#     rm -rf node_modules
-#     npm install
-#     npm run build
-#   displayName: 'npm install and build'
-
-# - task: CopyFiles@2
-#   inputs:
-#     sourceFolder: $(Build.SourcesDirectory)
-#     targetFolder: $(Build.ArtifactStagingDirectory)
-
-# - task: ArchiveFiles@2
-#   inputs:
-#     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-#     includeRootFolder: false
-#     archiveType: 'tar'
-#     tarCompression: 'gz'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).tar.gz'
-#     replaceExistingArchive: true
-#     verbose: true
-
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: '$(Build.ArtifactStagingDirectory)/build_$(Build.BuildId).tar.gz'
-#     ArtifactName: 'drop'
-#     publishLocation: 'Container'
-# (Build.ArtifactStagingDirectory)
